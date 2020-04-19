@@ -1,5 +1,5 @@
 [package]
-name = "language"
+name = "cheatsheet"
 version = "0.1.0"
 authors = ["vasu"]
 edition = "2018"

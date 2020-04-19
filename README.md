@@ -4,7 +4,7 @@ Exercises from The Rust Programming Language book.
 
 # Guide
 
-`language` crate contains all the rust language basics. Its not complete yet.
+`cheatsheet` crate/package contains all the rust language basics. Its not complete yet.
 
 # References
 
