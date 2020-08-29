@@ -1,3 +1,4 @@
+// Understand enum and how to define methods for it
 enum IpAddrKind {
     V4,
     V6,
