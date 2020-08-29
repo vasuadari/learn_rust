@@ -275,4 +275,19 @@ fn main() {
   }
 
   println!("{:?}", map);
+
+  // uncomment below lines to test panic
+  // let v = vec![1, 2, 3];
+
+  // v[99];
+
+  // panic!("crash and burn");
+  use std::fs::File;
+
+  let f = File::open("hello.txt");
+
+  let f = match f {
+    Ok(file) => file,
+    Err(error) => panic!("problem opening the file: {:?}", error),
+  };
 }
