@@ -13,6 +13,7 @@ fn main() {
 
         let mut guess = String::new();
 
+        // read_line accepts mutable reference to read/store input
         io::stdin().read_line(&mut guess)
             .expect("Failed to read line");
 
