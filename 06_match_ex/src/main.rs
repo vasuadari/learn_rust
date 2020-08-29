@@ -1,3 +1,4 @@
+// Learn how to use match
 #[derive(Debug)]
 enum UsState {
     Alabama,
