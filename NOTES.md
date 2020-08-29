@@ -9,6 +9,8 @@
       But at the same time when usage of immutable reference ends, mutable reference
       can be created.
 - The Slice Type
-    - `let a = “hello world”; or `let a = String::from(“hello world”);`
+    ```rust
+    let a = "hello world"; or `let a = String::from("hello world");`
+    ```
 - Defining and Instantiating Structs
 - Method Syntax
