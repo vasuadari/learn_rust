@@ -1,3 +1,4 @@
+// Understand packages, crates and modules
 mod front_of_house;
 mod back_of_house;
 
