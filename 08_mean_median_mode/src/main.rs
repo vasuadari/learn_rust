@@ -5,29 +5,25 @@ fn mean(list: &Vec<i32>, length: i32) -> i32 {
   sum / length
 }
 
-fn median(list: &Vec<i32>, length: usize) -> i32 {
-  if length % 2 == 0 {
-    let median_index = length / 2 - 1;
-    let median =
-      match list.get(median_index) {
-        Some(&a) => a,
-        None => 0,
-      };
+fn median_index_for(list: &Vec<i32>, index: usize) -> i32 {
+  match list.get(index) {
+    Some(&a) => a,
+    None => 0,
+  }
+}
 
-    let next_median =
-      match list.get(median_index + 1) {
-        Some(&a) => a,
-        None => 0,
-      };
+fn median(list: &Vec<i32>, length: usize) -> i32 {
+  let rem = length % 2;
+  let index = (length + rem) / 2 - 1;
+  let median = median_index_for(list, index);
+
+  if rem == 0 {
+    let next_median = median_index_for(list, index + 1);
     (median + next_median) / 2
   }
   else
   {
-    let median_index = (length + 1) / 2 - 1;
-    match list.get(median_index) {
-      Some(&a) => a,
-      None => 0,
-    }
+    median
   }
 }
 
