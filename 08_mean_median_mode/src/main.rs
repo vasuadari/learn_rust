@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
-fn mean(list: &Vec<i32>, length: usize) -> i32 {
+fn mean(list: &Vec<i32>, length: i32) -> i32 {
   let sum: i32 = list.iter().sum();
-  sum / (length as i32)
+  sum / length
 }
 
 fn median(list: &Vec<i32>, length: usize) -> i32 {
@@ -57,7 +57,7 @@ fn main() {
   let length = list.len();
   list.sort();
 
-  let mean = mean(&list, length);
+  let mean = mean(&list, length as i32);
   println!("Mean: {:?}", mean);
 
   let median = median(&list, length);
