@@ -14,3 +14,8 @@
     ```
 - Defining and Instantiating Structs
 - Method Syntax
+- Generic Data Types
+    - Rust use monomorphization so that generic code is converted to concrete type at
+      the compile time
+    - Generic code perform equal to concrete types at the runtime
+    - This makes Rust's generics extermely efficient at the runtime

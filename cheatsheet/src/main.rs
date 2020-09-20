@@ -357,4 +357,106 @@ fn main() {
         "file content or error {:?}",
         shortest_read_username_from_file()
     );
+
+    fn largest_i32(list: &[i32]) -> &i32 {
+        let mut largest = &list[0];
+
+        for item in list {
+            if item > largest {
+                largest = item;
+            }
+        }
+
+        largest
+    }
+
+    let number_list = vec![10, 4, 5];
+
+    println!("The largest number is {}", largest_i32(&number_list));
+
+    fn largest_char(list: &[char]) -> &char {
+        let mut largest = &list[0];
+
+        for item in list {
+            if item > largest {
+                largest = item;
+            }
+        }
+
+        largest
+    }
+
+    let char_list = vec!['a', 'd', 'f', 'e'];
+
+    println!("The largeset char is {}", largest_char(&char_list));
+
+    // Generic data types
+    // Uncomment to check what happens
+    // fn largest<T>(list: &[T]) -> &T {
+    //     let mut largest = &list[0];
+
+    //     for item in list {
+    //         // Code would panic here, as not all types can be compared with `>`
+    //         if item > largest {
+    //             largest = item;
+    //         }
+    //     }
+
+    //     largest
+    // }
+
+    // Using curly braces to not conflict with already defined Point struct
+    // above
+    {
+        struct Point<T> {
+            x: T,
+            y: T,
+        }
+
+        impl<T> Point<T> {
+            fn x(&self) -> &T {
+                &self.x
+            }
+        }
+
+        impl Point<f32> {
+            fn distance_from_origin(&self) -> f32 {
+                (self.x.powi(2) + self.y.powi(2)).sqrt()
+            }
+        }
+
+        let integer = Point { x: 5, y: 6 };
+        let float = Point { x: 5.5, y: 6.6 };
+        // Uncomment to check
+        // let mixed = Point { x: 5, y: 6.6 };
+        println!("integer.x = {}", integer.x());
+        println!(
+            "distance of point(5.5, 6.6) from point at coordinates 0.0, 0.0: {}",
+            float.distance_from_origin()
+        );
+    }
+
+    {
+        struct Point<T, U> {
+            x: T,
+            y: U,
+        }
+
+        let mixed = Point { x: 5, y: 6.6 };
+
+        impl<T, U> Point<T, U> {
+            fn mixup<V, W>(self, other: Point<V, W>) -> Point<T, W> {
+                Point {
+                    x: self.x,
+                    y: other.y,
+                }
+            }
+        }
+
+        let p1 = Point { x: 5, y: 6 };
+        let p2 = Point { x: "hello", y: 'c' };
+
+        let p3 = p1.mixup(p2);
+        println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
+    }
 }
