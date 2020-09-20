@@ -1,293 +1,305 @@
 fn main() {
-  let x: (i32, f64, u8) = (500, 6.4, 1);
+    let x: (i32, f64, u8) = (500, 6.4, 1);
 
-  let five_hundred = x.0;
+    let five_hundred = x.0;
 
-  let six_point_four = x.1;
+    let six_point_four = x.1;
 
-  let one = x.2;
+    let one = x.2;
 
-  println!("({}, {}, {})", five_hundred, six_point_four, one);
+    println!("({}, {}, {})", five_hundred, six_point_four, one);
 
-  // Functions
-  fn five() -> i32 {
-    5
-  }
-
-  let x = five();
-
-  println!("The value of x is: {}", x);
-
-  let y = plus_one(5);
-
-  println!("The value of y is: {}", y);
-
-  fn plus_one(x: i32) -> i32 {
-    x + 1
-  }
-
-  let number = 3;
-
-  if number < 5 {
-    println!("condition was true");
-  }
-  else {
-    println!("condition was false");
-  }
-
-  // Ownership example
-  let s = String::from("hello");
-
-  takes_ownership(s);
-
-  // variable s goes out of scope as String has Drop trait
-
-  fn takes_ownership(some_string: String) {
-    println!("{}", some_string);
-  }
-
-  // References and Borrowing
-  let hello = String::from("hello");
-
-  let len = calculate_length(&hello);
-
-  println!("length of {} is {}", hello, len);
-
-  fn calculate_length(str: &String) -> usize {
-    str.len()
-  }
-
-  // The Slice Type
-  let hello = "hello";
-  // behind the scene equals
-  let hello = &String::from("hello")[..];
-
-  // Defining and Instantiating Structs
-  struct User {
-    username: String,
-    email: String,
-    sign_in_count: u64,
-    active: bool
-  }
-
-  let user1 = User {
-    username: String::from("Vasu"),
-    email: String::from("vasuadari@vasuadari.com"),
-    sign_in_count: 1,
-    active: true
-  };
-
-  let mut user2 = User {
-    username: String::from("Vasu"),
-    email: String::from("vasuadari@vasuadari.com"),
-    sign_in_count: user1.sign_in_count,
-    ..user1
-  };
-
-  user2.username = String::from("Vasu Adari");
-
-  fn build_user(email: String, username: String) -> User {
-    User {
-      username,
-      email,
-      sign_in_count: 1,
-      active: true
+    // Functions
+    fn five() -> i32 {
+        5
     }
-  }
 
-  let new_user = build_user(
-    String::from("vasuadari@vasuadari.com"),
-    String::from("Vasu Adari")
-  );
+    let x = five();
 
-  #[derive(Debug)]
-  struct Color(i32, i32, i32);
-  #[derive(Debug)]
-  struct Point(i32, i32, i32);
+    println!("The value of x is: {}", x);
 
-  let black = Color(0, 0, 0);
-  let origin = Point(0, 0, 0);
+    let y = plus_one(5);
 
-  println!("{:?}", black);
-  println!("{:?}", origin);
+    println!("The value of y is: {}", y);
 
-  // Option
-  let some_number = Some(5);
-  let some_string = Some("a string");
+    fn plus_one(x: i32) -> i32 {
+        x + 1
+    }
 
-  let absent_number: Option<i32> = None;
+    let number = 3;
 
-  let x: i8 = 5;
-  let y: Option<i8> = Some(5);
+    if number < 5 {
+        println!("condition was true");
+    } else {
+        println!("condition was false");
+    }
 
-  // let sum = x + y; // this line would fail uncomment to check
+    // Ownership example
+    let s = String::from("hello");
 
-  // if let
-  let some_u8_value = Some(0u8);
-  match some_u8_value {
-    Some(3) => println!("three"),
-    _ => (),
-  }
+    takes_ownership(s);
 
-  if let Some(0u8) = some_u8_value {
-    println!("[if let] zero");
-  }
+    // variable s goes out of scope as String has Drop trait
 
-  // Vectors
-  let mut v: Vec<i32> = Vec::new();
-  v.push(1);
-  v.push(4);
-  v.push(6);
+    fn takes_ownership(some_string: String) {
+        println!("{}", some_string);
+    }
 
-  let v = vec![1, 2, 3, 4, 5];
-  // let does_not_exist = &v[100]; // rust panics
-  let does_not_exist = v.get(100);
+    // References and Borrowing
+    let hello = String::from("hello");
 
-  let mut v = vec![1, 2, 3, 4, 5];
-  let first = &v[0];
-  // v.push(6); // this would fail as immutable reference exists already
+    let len = calculate_length(&hello);
 
-  println!("The first element is: {}", first);
+    println!("length of {} is {}", hello, len);
 
-  let v = vec![100, 32, 57];
-  for i in &v {
-    println!("{}", i);
-  }
+    fn calculate_length(str: &String) -> usize {
+        str.len()
+    }
 
-  let mut v = vec![100, 32, 57];
-  for i in &mut v {
-    *i += 50;
-  }
+    // The Slice Type
+    let hello = "hello";
+    // behind the scene equals
+    let hello = &String::from("hello")[..];
 
-  // Storing UTF-8 Encoded Text with Strings
-  let mut s = String::new();
+    // Defining and Instantiating Structs
+    struct User {
+        username: String,
+        email: String,
+        sign_in_count: u64,
+        active: bool,
+    }
 
-  // String literal
-  let data = "initial contents";
+    let user1 = User {
+        username: String::from("Vasu"),
+        email: String::from("vasuadari@vasuadari.com"),
+        sign_in_count: 1,
+        active: true,
+    };
 
-  let s = data.to_string();
+    let mut user2 = User {
+        username: String::from("Vasu"),
+        email: String::from("vasuadari@vasuadari.com"),
+        sign_in_count: user1.sign_in_count,
+        ..user1
+    };
 
-  let s = "initial contents".to_string();
+    user2.username = String::from("Vasu Adari");
 
-  let s = String::from("initial contents");
+    fn build_user(email: String, username: String) -> User {
+        User {
+            username,
+            email,
+            sign_in_count: 1,
+            active: true,
+        }
+    }
 
-  let hello = String::from("नमस्ते");
-  println!("Hello in Hindi: {}", hello);
+    let new_user = build_user(
+        String::from("vasuadari@vasuadari.com"),
+        String::from("Vasu Adari"),
+    );
 
-  let mut s = String::from("foo");
-  s.push_str("bar");
+    #[derive(Debug)]
+    struct Color(i32, i32, i32);
+    #[derive(Debug)]
+    struct Point(i32, i32, i32);
 
-  let mut s1 = String::from("foo");
-  let s2 = "bar";
-  s1.push_str(s2);
-  println!("s2 is {}", s2);
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
 
-  let mut s = String::from("lo");
-  s.push('l');
+    println!("{:?}", black);
+    println!("{:?}", origin);
 
-  let s1 = String::from("Hello, ");
-  let s2 = String::from("world!");
-  println!("s1: {}", s1);
-  let s3 = s1 + &s2;
-  println!("s2: {}", s2);
-  println!("s1 + s2 = {}", s3);
+    // Option
+    let some_number = Some(5);
+    let some_string = Some("a string");
 
-  let s1 = String::from("tic");
-  let s2 = String::from("tac");
-  let s3 = String::from("toe");
+    let absent_number: Option<i32> = None;
 
-  let s = s1 + "-" + &s2 + "-" + &s3; // s1 value has moved here
+    let x: i8 = 5;
+    let y: Option<i8> = Some(5);
 
-  let s1 = String::from("tic");
-  let s2 = String::from("tac");
-  let s3 = String::from("toe");
+    // let sum = x + y; // this line would fail uncomment to check
 
-  let s = format!("{}-{}-{}", s1, s2, s3);
-  println!("s1: {}, s2: {}, s3: {}", s1, s2, s3);
+    // if let
+    let some_u8_value = Some(0u8);
+    match some_u8_value {
+        Some(3) => println!("three"),
+        _ => (),
+    }
 
-  let hello = "Здравствуйте";
-  let s = &hello[0..2];
-  println!("first letter of Здравствуйте {}", s);
+    if let Some(0u8) = some_u8_value {
+        println!("[if let] zero");
+    }
 
-  for c in hello.chars() {
-    println!("{}", c);
-  }
+    // Vectors
+    let mut v: Vec<i32> = Vec::new();
+    v.push(1);
+    v.push(4);
+    v.push(6);
 
-  let hello = "नमस्";
-  for c in hello.chars() {
-    println!("char: {}", c);
-  }
+    let v = vec![1, 2, 3, 4, 5];
+    // let does_not_exist = &v[100]; // rust panics
+    let does_not_exist = v.get(100);
 
-  for c in hello.bytes() {
-    println!("byte: {}", c);
-  }
+    let mut v = vec![1, 2, 3, 4, 5];
+    let first = &v[0];
+    // v.push(6); // this would fail as immutable reference exists already
 
-  // Storing Keys with Associated Values in Hash Maps
-  use std::collections::HashMap;
+    println!("The first element is: {}", first);
 
-  let mut scores = HashMap::new();
+    let v = vec![100, 32, 57];
+    for i in &v {
+        println!("{}", i);
+    }
 
-  scores.insert(String::from("Blue"), 10);
-  scores.insert(String::from("Yellow"), 50);
+    let mut v = vec![100, 32, 57];
+    for i in &mut v {
+        *i += 50;
+    }
 
-  let mut teams = vec![String::from("Blue"), String::from("Yellow")];
-  let mut initial_values = vec![10, 50];
+    // Storing UTF-8 Encoded Text with Strings
+    let mut s = String::new();
 
-  let scores: HashMap<_, _> = teams.iter().zip(initial_values.iter()).collect();
+    // String literal
+    let data = "initial contents";
 
-  for (k, v) in scores.iter() {
-    println!("{} team score: {}", k, v);
-  }
+    let s = data.to_string();
 
-  let field_name = String::from("Favorite color");
-  let field_value = String::from("Blue");
+    let s = "initial contents".to_string();
 
-  let mut map = HashMap::new();
-  map.insert(field_name, field_value);
-  // Accessing field_name or field_value won't work has the ownership is taken by previous function
-  // field_value;
-  //
-  let mut scores = HashMap::new();
-  scores.insert(String::from("Blue"), 10);
-  scores.insert(String::from("Yellow"), 50);
+    let s = String::from("initial contents");
 
-  let team_name = String::from("Blue");
-  let score = scores.get(&team_name);
-  println!("Blue team score: {:?}", score);
-  scores.insert(String::from("Blue"), 10);
-  println!("{:?}", scores);
+    let hello = String::from("नमस्ते");
+    println!("Hello in Hindi: {}", hello);
 
-  let mut scores = HashMap::new();
-  scores.insert(String::from("Blue"), 10);
+    let mut s = String::from("foo");
+    s.push_str("bar");
 
-  scores.entry(String::from("Yellow")).or_insert(50);
-  scores.entry(String::from("Blue")).or_insert(50);
+    let mut s1 = String::from("foo");
+    let s2 = "bar";
+    s1.push_str(s2);
+    println!("s2 is {}", s2);
 
-  println!("{:?}", scores);
+    let mut s = String::from("lo");
+    s.push('l');
 
-  let text = "hello world wonderful world";
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("world!");
+    println!("s1: {}", s1);
+    let s3 = s1 + &s2;
+    println!("s2: {}", s2);
+    println!("s1 + s2 = {}", s3);
 
-  let mut map = HashMap::new();
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
 
-  for word in text.split_whitespace() {
-    let count = map.entry(word).or_insert(0);
-    *count += 1;
-  }
+    let s = s1 + "-" + &s2 + "-" + &s3; // s1 value has moved here
 
-  println!("{:?}", map);
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
 
-  // uncomment below lines to test panic
-  // let v = vec![1, 2, 3];
+    let s = format!("{}-{}-{}", s1, s2, s3);
+    println!("s1: {}, s2: {}, s3: {}", s1, s2, s3);
 
-  // v[99];
+    let hello = "Здравствуйте";
+    let s = &hello[0..2];
+    println!("first letter of Здравствуйте {}", s);
 
-  // panic!("crash and burn");
-  use std::fs::File;
+    for c in hello.chars() {
+        println!("{}", c);
+    }
 
-  let f = File::open("hello.txt");
+    let hello = "नमस्";
+    for c in hello.chars() {
+        println!("char: {}", c);
+    }
 
-  let f = match f {
-    Ok(file) => file,
-    Err(error) => panic!("problem opening the file: {:?}", error),
-  };
+    for c in hello.bytes() {
+        println!("byte: {}", c);
+    }
+
+    // Storing Keys with Associated Values in Hash Maps
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let mut teams = vec![String::from("Blue"), String::from("Yellow")];
+    let mut initial_values = vec![10, 50];
+
+    let scores: HashMap<_, _> = teams.iter().zip(initial_values.iter()).collect();
+
+    for (k, v) in scores.iter() {
+        println!("{} team score: {}", k, v);
+    }
+
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+    // Accessing field_name or field_value won't work has the ownership is taken by previous function
+    // field_value;
+    //
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);
+    println!("Blue team score: {:?}", score);
+    scores.insert(String::from("Blue"), 10);
+    println!("{:?}", scores);
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{:?}", scores);
+
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+
+    println!("{:?}", map);
+
+    // uncomment below lines to test panic
+    // let v = vec![1, 2, 3];
+
+    // v[99];
+
+    // panic!("crash and burn");
+    use std::fs::File;
+    use std::io::ErrorKind;
+
+    let f = File::open("hello.txt");
+
+    // uncomment below lines to panic
+    // let f = match f {
+    //   Ok(file) => file,
+    //   Err(error) => panic!("problem opening the file: {:?}", error),
+    // };
+
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("problem creating the file: {:?}", e),
+            },
+            other_error => panic!("problem opening the file: {:?}", other_error),
+        },
+    };
 }
