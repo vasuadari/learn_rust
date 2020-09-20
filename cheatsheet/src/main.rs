@@ -302,4 +302,59 @@ fn main() {
             other_error => panic!("problem opening the file: {:?}", other_error),
         },
     };
+
+    use std::io;
+    use std::io::Read;
+
+    fn read_username_from_file() -> Result<String, io::Error> {
+        let f = File::open("hello1.txt");
+
+        let mut f = match f {
+            Ok(file) => file,
+            Err(error) => return Err(error),
+        };
+
+        let mut s = String::new();
+
+        match f.read_to_string(&mut s) {
+            Ok(_) => Ok(s),
+            Err(error) => Err(error),
+        }
+    }
+
+    println!("file content or error {:?}", read_username_from_file());
+
+    fn shorter_read_username_from_file() -> Result<String, io::Error> {
+        let f = File::open("hello1.txt");
+
+        let mut f = match f {
+            Ok(file) => file,
+            Err(error) => return Err(error),
+        };
+
+        let mut s = String::new();
+
+        // Using `?` will return Err(error) option to be used when a function
+        // returns Result
+        f.read_to_string(&mut s)?;
+        Ok(s)
+    }
+
+    println!(
+        "file content or error {:?}",
+        shorter_read_username_from_file()
+    );
+
+    fn shortest_read_username_from_file() -> Result<String, io::Error> {
+        let mut s = String::new();
+
+        File::open("hello1.txt")?.read_to_string(&mut s)?;
+
+        Ok(s)
+    }
+
+    println!(
+        "file content or error {:?}",
+        shortest_read_username_from_file()
+    );
 }
